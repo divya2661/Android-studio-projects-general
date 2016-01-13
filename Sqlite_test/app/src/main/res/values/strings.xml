@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sqlite_test</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_insert">Insert</string>
+    <string name="action_delete">Delete</string>
+    <string name="title_activity_display_contact">DisplayContact</string>
+</resources>
