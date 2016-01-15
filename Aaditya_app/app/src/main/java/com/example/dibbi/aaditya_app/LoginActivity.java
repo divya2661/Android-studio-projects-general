@@ -83,7 +83,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnLinkToRegister.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         db.addUser(First_name, Last_name, Email, Contact, Facebook, Twitter_link, Dob, Address, uid, created_at);
                          //Launch main activity
-                        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, StudentProfile.class);
                         startActivity(intent);
                         finish();
                     } else {

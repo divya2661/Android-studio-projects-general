@@ -1,12 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.dibbi.aaditya_app.MainActivity">
+    tools:context="com.example.dibbi.aaditya_app.StudentProfile">
+
 
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/Student_profile_action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/update_profile"
+        android:title="Update Profile"
+        />
 </menu>

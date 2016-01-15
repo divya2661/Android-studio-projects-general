@@ -1,39 +1,48 @@
 package com.example.dibbi.aaditya_app;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+public class StudentProfile extends AppCompatActivity {
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-
-public class MainActivity extends AppCompatActivity {
-
+    private Button facebook,twitter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        setContentView(R.layout.activity_student_profile);
+
+        facebook = (Button)findViewById(R.id.facebook_link);
+        twitter = (Button)findViewById(R.id.twitter_link);
+
+        facebook.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.facebook.com/"));
+                startActivity(intent);
+            }
+        });
+
+        twitter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.twitter.com/"));
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +51,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_student_profile, menu);
         return true;
     }
 
@@ -57,9 +68,13 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.update_profile){
+
+        }
+
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.Student_profile_action_settings) {
             return true;
         }
 
@@ -67,31 +82,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void register_activity(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+
+
+    public void goToFb(){
+        Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.facebook.com/"));
+        startActivity(viewIntent);
     }
 
-    public void login_activity(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+    public void goToTwt(){
+        Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.twitter.com/"));
+        startActivity(viewIntent);
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
-    }
 
 }
