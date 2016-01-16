@@ -15,6 +15,7 @@ import android.widget.Button;
 public class StudentProfile extends AppCompatActivity {
 
     private Button facebook,twitter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

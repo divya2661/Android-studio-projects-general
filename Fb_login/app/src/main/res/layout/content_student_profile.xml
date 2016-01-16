@@ -38,7 +38,7 @@
         android:layout_toEndOf="@+id/profile_pic" />
 
     <Button
-        android:id="@+id/twitter_link"
+        android:id="@+id/google"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="#DC4E41"
@@ -58,8 +58,8 @@
         android:layout_below="@+id/profile_pic"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/twitter_link"
-        android:layout_toStartOf="@+id/twitter_link" />
+        android:layout_toLeftOf="@+id/google"
+        android:layout_toStartOf="@+id/google" />
 
     <TextView
         android:layout_width="wrap_content"

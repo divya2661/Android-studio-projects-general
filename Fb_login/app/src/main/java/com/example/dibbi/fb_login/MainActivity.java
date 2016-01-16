@@ -24,8 +24,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.internal.LocationRequestUpdateData;
 import com.example.dibbi.fb_login.AppController;
+import com.google.android.gms.plus.Plus;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,14 +36,16 @@ import java.lang.ref.ReferenceQueue;
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+        View.OnClickListener, GoogleApiClient.ConnectionCallbacks {
 
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
     private String Gname,Gemail,Gid,Ggender,Glink,Flink,Gbday,Gimagelink;
-    private GoogleApiClient mGoogleApiClient;
+    protected GoogleApiClient mGoogleApiClient;
     private TextView mstatusTextView;
     private ProgressDialog pDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,11 @@ public class MainActivity extends AppCompatActivity implements
                 .requestEmail().build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+                .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
 
         SignInButton signInButton = (SignInButton)findViewById(R.id.sign_in_button);
@@ -87,8 +94,26 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id==R.id.signOut){
+            SignOut();
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void SignOut() {
+
+        if(mGoogleApiClient.isConnected()){
+           
+        }
+
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(Status status) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -229,5 +254,15 @@ public class MainActivity extends AppCompatActivity implements
         if(!pDialog.isShowing()){
             pDialog.show();
         }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
